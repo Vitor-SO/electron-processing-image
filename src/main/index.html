@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval';" />
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Welcome to Image Processing Program </h1>
+      <div class="mainContainer">
+          <div class="image_url_container">
+              <h2>Download Image from URL</h2>
+              <input id="input-url" type="text" placeholder="Enter with image url" />
+
+              <input type="text" id="image-name"  placeholder="Name of image"/>
+              
+              <button id="btn-download-image" >Download Image</button></button>
+          </div>
+
+          <div class="image_import_container">
+              <h2>Import Image From Computer</h2>
+                <button id="btn-import-image">Import</button>
+          </div>
+
+
+          <div class="btnImageProcess">
+            <button id="btn-process-image">Process Image</button>
+          </div>
+      </div>
+  </div>
+
+    <script type="text/javascript" src="../renderer/DownloadImage/index.js"></script>
+    <script type="text/javascript" src="../renderer/importImage/index.js"></script>
+    <script type="text/javascript" src="../renderer/CoreWindow/index.js"></script>
+</body>
+</html>

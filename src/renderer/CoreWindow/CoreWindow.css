@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  background-color: #282c34;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #fff;
+  padding: 1rem;
+}
+
+.btn {
+  margin-bottom: 2rem;
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,27 @@
+{
+  "name": "image-processing-program",
+  "version": "1.0.0",
+  "description": "program to execute some functions os processing image",
+  "main": "./src/main/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "dev": "nodemon ./src/main/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vitor-SO/electron-processing-image.git"
+  },
+  "author": "vitor santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vitor-SO/electron-processing-image/issues"
+  },
+  "homepage": "https://github.com/Vitor-SO/electron-processing-image#readme",
+  "devDependencies": {
+    "electron": "^20.1.3"
+  },
+  "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1"
+  }
+}
