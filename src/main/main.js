@@ -1,11 +1,12 @@
+require('electron-reload')(__dirname)
 const { app, BrowserWindow, shell, ipcMain, dialog } =require('electron')
 const { join } =require('path')
 const fs =require('fs')
 const https =require('node:https')
-const transformations = require('../processImage/scripts/transformations')
-require('electron-reload')(__dirname)
-// import ImageProcessCore from '../../src/Components/ImageProcessCore'
-// import CoreWindow from '../../src/Components/ImageProcessCore/CoreWindow'
+const Transformations = require('../renderer/processImage/scripts/Transformations/index.js')
+const {PythonShell} =  require('python-shell');
+const path = require('path')
+// const Transformations =require('../renderer/processImage/scripts/Transformations/index.js')
 
 let win = null
 async function createWindow() {
@@ -84,7 +85,7 @@ ipcMain.on("download-image",(event, url,imageName) => {
 
     // 
     setTimeout(()=>{
-      fs.writeFileSync(`./src/Downloads/${imageName}`,fs.readFileSync(currentPath.filePath))
+      fs.writeFileSync(`./src/renderer/processImage/Images/${imageName}`,fs.readFileSync(currentPath.filePath))
     },1500)
     
     // fs.copyFileSync(currentPath.filePath, `./src/Downloads/${filename}`)
@@ -95,12 +96,13 @@ ipcMain.on("download-image",(event, url,imageName) => {
 //function import image
 ipcMain.on('import-image', ()=>{
   dialog.showOpenDialog({defaultPath: app.getPath("downloads")}).then((currentPath)=>{
-    fs.writeFileSync('./src/Downloads/image.png', fs.readFileSync(currentPath.filePaths[0]))
+    const basename = path.basename(currentPath.filePaths[0])
+    fs.writeFileSync(`./src/renderer/processImage/Images/${basename}`, fs.readFileSync(currentPath.filePaths[0]))
   })
 })
 
 
-//core process images functions
+//create core window
 
 ipcMain.on('create-coreWindow', ()=>{
   let win =null;
@@ -117,7 +119,21 @@ ipcMain.on('create-coreWindow', ()=>{
   
 })
 
-ipcMain.on('btn-negative', ()=>{transformations.negative()})
-ipcMain.on('btn-logarithmic', ()=>{transformations.logarithmic()})
-ipcMain.on('btn-potency', ()=>{transformations.potency()})
-ipcMain.on('btn-bitPlaneSlicing', ()=>{transformations.bitPlaneSlicing()})
+
+//core window functions
+ipcMain.on('btn-negative', ()=>{
+  //get path image for python script
+  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+    //call the negative function
+    const filename = path.basename(currentPath.filePaths[0])
+    const negativeImageName = filename.split('.')[0]
+    Transformations.negative(currentPath.filePaths[0], negativeImageName)
+  })
+
+
+})
+
+ipcMain.on('btn-logarithmic', ()=>{Transformations.logarithmic()})
+ipcMain.on('btn-potency', ()=>{Transformations.potency()})
+ipcMain.on('btn-bitPlaneSlicing', ()=>{Transformations.bitPlaneSlicing()})
+
