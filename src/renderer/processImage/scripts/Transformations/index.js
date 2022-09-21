@@ -15,12 +15,28 @@ class Transformations{
     });
   }
 
-  logarithmic(){
-    console.log("logarithmic")
+  logarithmic(filePath, logImageName){
+    const optionsPath ={
+      args: [filePath, logImageName],
+    }
+
+    const logarithmic = join(__dirname,'./Logarithmic/logarithmic.py')
+  PythonShell.run(logarithmic, optionsPath, function (err,results) {
+      if (err) throw err;
+      console.log('finished');
+    });
   }
 
-  potency(){
-    console.log("potency")
+  potency(filePath,potImageName){
+    const optionsPath ={
+      args: [filePath, potImageName],
+    }
+
+    const potency = join(__dirname,'./Potency/potency.py')
+  PythonShell.run(potency, optionsPath, function (err,results) {
+      if (err) throw err;
+      console.log('finished');
+    });
   }
 
   bitPlaneSlicing(){

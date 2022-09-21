@@ -117,10 +117,8 @@ ipcMain.on('create-coreWindow', ()=>{
 
   win.loadFile('src/renderer/CoreWindow/CoreWindow.html')
   
-})
 
-
-//core window functions
+  //core window functions
 ipcMain.on('btn-negative', ()=>{
   //get path image for python script
   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
@@ -130,10 +128,36 @@ ipcMain.on('btn-negative', ()=>{
     Transformations.negative(currentPath.filePaths[0], negativeImageName)
   })
 
+  
+})
+
+ipcMain.on('btn-logarithmic', ()=>{
+  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+    //call the log function
+    const filename = path.basename(currentPath.filePaths[0])
+    const logImageName = filename.split('.')[0]
+    Transformations.logarithmic(currentPath.filePaths[0], logImageName)
+  })
+})
+
+ipcMain.on('btn-potency', ()=>{
+  
+  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+    //call the negative function
+    const filename = path.basename(currentPath.filePaths[0])
+    const potImageName = filename.split('.')[0]
+    Transformations.potency(currentPath.filePaths[0], potImageName)
+  })
+
 
 })
 
-ipcMain.on('btn-logarithmic', ()=>{Transformations.logarithmic()})
-ipcMain.on('btn-potency', ()=>{Transformations.potency()})
+
 ipcMain.on('btn-bitPlaneSlicing', ()=>{Transformations.bitPlaneSlicing()})
+
+
+})
+
+
+
 
