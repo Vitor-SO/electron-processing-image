@@ -39,8 +39,16 @@ class Transformations{
     });
   }
 
-  bitPlaneSlicing(){
-    console.log("bitPlaneSlicing")
+  bitPlaneSlicing(filePath,bpsImageName){
+    const optionsPath ={
+      args: [filePath, bpsImageName],
+    }
+
+    const bps = join(__dirname,'./BitPlaneSlicing/bitPlaneSlicing.py')
+  PythonShell.run(bps, optionsPath, function (err,results) {
+      if (err) throw err;
+      console.log('finished');
+    });
   }
 }
 

@@ -153,7 +153,18 @@ ipcMain.on('btn-potency', ()=>{
 })
 
 
-ipcMain.on('btn-bitPlaneSlicing', ()=>{Transformations.bitPlaneSlicing()})
+ipcMain.on('btn-bitPlaneSlicing', ()=>{
+  
+  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+    //call the negative function
+    const filename = path.basename(currentPath.filePaths[0])
+    const bpsImageName = filename.split('.')[0]
+    Transformations.bitPlaneSlicing(currentPath.filePaths[0], bpsImageName)
+  })
+
+
+
+})
 
 
 })
