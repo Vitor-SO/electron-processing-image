@@ -6,6 +6,7 @@ const https =require('node:https')
 const Transformations = require('../renderer/processImage/scripts/Transformations/index.js')
 const {PythonShell} =  require('python-shell');
 const path = require('path')
+const Filters = require('../renderer/processImage/scripts/Filters/index.js')
 // const Transformations =require('../renderer/processImage/scripts/Transformations/index.js')
 
 let win = null
@@ -166,6 +167,68 @@ ipcMain.on('btn-bitPlaneSlicing', ()=>{
 
 })
 
+// ipcMain.on('btn-histogram',()=>{
+//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+//     //call the negative function
+//     const filename = path.basename(currentPath.filePaths[0])
+//     const bpsImageName = filename.split('.')[0]
+//     Transformations.(currentPath.filePaths[0], bpsImageName)
+//   })
+// })
+
+ipcMain.on('btn-media',()=>{
+  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+    //call the negative function
+    const filename = path.basename(currentPath.filePaths[0])
+    const mediaImageName = filename.split('.')[0]
+    Filters.media(currentPath.filePaths[0], mediaImageName)
+  })
+})
+
+// ipcMain.on('btn-mediana',()=>{
+//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+//     //call the negative function
+//     const filename = path.basename(currentPath.filePaths[0])
+//     const bpsImageName = filename.split('.')[0]
+//     Filters.mediana(currentPath.filePaths[0], bpsImageName)
+//   })
+// })
+
+// ipcMain.on('btn-laplacian',()=>{
+//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+//     //call the negative function
+//     const filename = path.basename(currentPath.filePaths[0])
+//     const bpsImageName = filename.split('.')[0]
+//     Filters.laplacian(currentPath.filePaths[0], bpsImageName)
+//   })
+// })
+
+// ipcMain.on('btn-highboost',()=>{
+//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+//     //call the negative function
+//     const filename = path.basename(currentPath.filePaths[0])
+//     const bpsImageName = filename.split('.')[0]
+//     Filters.highboost(currentPath.filePaths[0], bpsImageName)
+//   })
+// })
+
+// ipcMain.on('btn-robert',()=>{
+//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+//     //call the negative function
+//     const filename = path.basename(currentPath.filePaths[0])
+//     const bpsImageName = filename.split('.')[0]
+//     Filters.robert(currentPath.filePaths[0], bpsImageName)
+//   })
+// })
+
+// ipcMain.on('btn-sobel',()=>{
+//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+//     //call the negative function
+//     const filename = path.basename(currentPath.filePaths[0])
+//     const bpsImageName = filename.split('.')[0]
+//     Filters.sobel(currentPath.filePaths[0], bpsImageName)
+//   })
+// })
 
 })
 

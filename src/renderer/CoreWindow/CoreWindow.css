@@ -11,13 +11,12 @@ body {
   color: #fff;
 }
 
-.btn-container {
+.transformations-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   border: 1px solid #fff;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .btn {
@@ -25,8 +24,27 @@ body {
   width: 100%;
   height: 50px;
   font-size: 18px;
+  margin: 0.5rem;
+}
+
+.btn-bitPlaneSlicing {
+  width: 100%;
+  height: 70px;
+  font-size: 18px;
+}
+
+.btn-bitPlaneSlicing:hover {
+  cursor: pointer;
 }
 
 .btn:hover {
   cursor: pointer;
+}
+
+.filters-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #fff;
+  padding: 0.5rem;
 }
