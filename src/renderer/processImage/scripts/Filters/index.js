@@ -28,17 +28,17 @@ class Filters{
     });
   }
 
-  // laplacian(filePath,potImageName){
-  //   const optionsPath ={
-  //     args: [filePath, potImageName],
-  //   }
+  laplacian(filePath,laplacianImageName){
+    const optionsPath ={
+      args: [filePath, laplacianImageName],
+    }
 
-  //   const potency = join(__dirname,'./Potency/potency.py')
-  // PythonShell.run(potency, optionsPath, function (err,results) {
-  //     if (err) throw err;
-  //     console.log('finished');
-  //   });
-  // }
+    const potency = join(__dirname,'./sharpening/Laplacian/laplacian.py')
+  PythonShell.run(potency, optionsPath, function (err,results) {
+      if (err) throw err;
+      console.log('finished');
+    });
+  }
 
   // highboost(filePath,bpsImageName){
   //   const optionsPath ={

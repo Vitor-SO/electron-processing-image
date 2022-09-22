@@ -1,7 +1,5 @@
 import cv2 
-import numpy as np 
 import sys   
-from PIL import Image      
       
 size = 5
 img = cv2.imread(sys.argv[1])
