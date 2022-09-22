@@ -185,14 +185,14 @@ ipcMain.on('btn-media',()=>{
   })
 })
 
-// ipcMain.on('btn-mediana',()=>{
-//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-//     //call the negative function
-//     const filename = path.basename(currentPath.filePaths[0])
-//     const bpsImageName = filename.split('.')[0]
-//     Filters.mediana(currentPath.filePaths[0], bpsImageName)
-//   })
-// })
+ipcMain.on('btn-mediana',()=>{
+  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+    //call the negative function
+    const filename = path.basename(currentPath.filePaths[0])
+    const medianaImageName = filename.split('.')[0]
+    Filters.mediana(currentPath.filePaths[0], medianaImageName)
+  })
+})
 
 // ipcMain.on('btn-laplacian',()=>{
 //   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{

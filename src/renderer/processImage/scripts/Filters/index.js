@@ -16,17 +16,17 @@ class Filters{
     });
   }
 
-  // mediana(filePath, logImageName){
-  //   const optionsPath ={
-  //     args: [filePath, logImageName],
-  //   }
+  mediana(filePath, medianaImageName){
+    const optionsPath ={
+      args: [filePath, medianaImageName],
+    }
 
-  //   const logarithmic = join(__dirname,'./Logarithmic/logarithmic.py')
-  // PythonShell.run(logarithmic, optionsPath, function (err,results) {
-  //     if (err) throw err;
-  //     console.log('finished');
-  //   });
-  // }
+    const mediana = join(__dirname,'./Smoothing/Mediana/mediana.py')
+  PythonShell.run(mediana, optionsPath, function (err,results) {
+      if (err) throw err;
+      console.log('finished');
+    });
+  }
 
   // laplacian(filePath,potImageName){
   //   const optionsPath ={
