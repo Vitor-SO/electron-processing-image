@@ -203,32 +203,29 @@ ipcMain.on('btn-laplacian',()=>{
   })
 })
 
-// ipcMain.on('btn-highboost',()=>{
-//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-//     //call the negative function
-//     const filename = path.basename(currentPath.filePaths[0])
-//     const bpsImageName = filename.split('.')[0]
-//     Filters.highboost(currentPath.filePaths[0], bpsImageName)
-//   })
-// })
+ipcMain.on('btn-highboost',()=>{
+  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+    const filename = path.basename(currentPath.filePaths[0])
+    const imghighboost = filename.split('.')[0]
+    Filters.highboost(currentPath.filePaths[0], imghighboost)
+  })
+})
 
-// ipcMain.on('btn-robert',()=>{
-//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-//     //call the negative function
-//     const filename = path.basename(currentPath.filePaths[0])
-//     const bpsImageName = filename.split('.')[0]
-//     Filters.robert(currentPath.filePaths[0], bpsImageName)
-//   })
-// })
+ipcMain.on('btn-robert',()=>{
+  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+    const filename = path.basename(currentPath.filePaths[0])
+    const robertImage = filename.split('.')[0]
+    Filters.robert(currentPath.filePaths[0], robertImage)
+  })
+})
 
-// ipcMain.on('btn-sobel',()=>{
-//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-//     //call the negative function
-//     const filename = path.basename(currentPath.filePaths[0])
-//     const bpsImageName = filename.split('.')[0]
-//     Filters.sobel(currentPath.filePaths[0], bpsImageName)
-//   })
-// })
+ipcMain.on('btn-sobel',()=>{
+  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+    const filename = path.basename(currentPath.filePaths[0])
+    const sobelImage = filename.split('.')[0]
+    Filters.sobel(currentPath.filePaths[0], sobelImage)
+  })
+})
 
 })
 

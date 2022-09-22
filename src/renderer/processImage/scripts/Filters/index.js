@@ -40,42 +40,42 @@ class Filters{
     });
   }
 
-  // highboost(filePath,bpsImageName){
-  //   const optionsPath ={
-  //     args: [filePath, bpsImageName],
-  //   }
+  highboost(filePath,imghighboost){
+    const optionsPath ={
+      args: [filePath, imghighboost],
+    }
 
-  //   const bps = join(__dirname,'./BitPlaneSlicing/bitPlaneSlicing.py')
-  // PythonShell.run(bps, optionsPath, function (err,results) {
-  //     if (err) throw err;
-  //     console.log('finished');
-  //   });
-  // }
+    const high = join(__dirname,'./sharpening/hightbooster/hightbooster.py')
+  PythonShell.run(high, optionsPath, function (err,results) {
+      if (err) throw err;
+      console.log('finished');
+    });
+  }
 
-  // robert(filePath,robertImageName){
-  //   const optionsPath ={
-  //     args: [filePath, robertImageName],
-  //   }
+  robert(filePath,robertImageName){
+    const optionsPath ={
+      args: [filePath, robertImageName],
+    }
 
-  //   const robert = join(__dirname,'./BitPlaneSlicing/bitPlaneSlicing.py')
-  // PythonShell.run(robert, optionsPath, function (err,results) {
-  //     if (err) throw err;
-  //     console.log('finished');
-  //   });
+    const robertPath = join(__dirname,'./sharpening/robert/robert.py')
+  PythonShell.run(robertPath, optionsPath, function (err,results) {
+      if (err) throw err;
+      console.log('finished');
+    });
   
-  // }
+  }
 
-  // sobel(filePath,bpsImageName){
-  //   const optionsPath ={
-  //     args: [filePath, bpsImageName],
-  //   }
+  sobel(filePath,sobelImageName){
+    const optionsPath ={
+      args: [filePath, sobelImageName],
+    }
 
-  //   const bps = join(__dirname,'./BitPlaneSlicing/bitPlaneSlicing.py')
-  // PythonShell.run(bps, optionsPath, function (err,results) {
-  //     if (err) throw err;
-  //     console.log('finished');
-  //   });
-  // }
+    const sobelPath = join(__dirname,'./sharpening/sobel/sobel.py')
+  PythonShell.run(sobelPath, optionsPath, function (err,results) {
+      if (err) throw err;
+      console.log('finished');
+    });
+  }
 }
 
 module.exports = new Filters();
