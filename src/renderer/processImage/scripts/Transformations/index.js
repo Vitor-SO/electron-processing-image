@@ -12,7 +12,10 @@ class Transformations{
   PythonShell.run(negative, optionsPath, function (err,results) {
       if (err) throw err;
       console.log('finished');
+      console.log(results);
     });
+
+    window.open('https://github.com', '_blank', 'top=500,left=200,frame=false,nodeIntegration=no')
   }
 
   logarithmic(filePath, logImageName){

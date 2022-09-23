@@ -1,6 +1,7 @@
 const { ipcRenderer } = require("electron")
 
 window.addEventListener('DOMContentLoaded', ()=>{
+  
   const btnNegative = document.getElementById('btn-negative')
   const btnLogarithmic = document.getElementById('btn-logarithmic')
   const btnPotency = document.getElementById('btn-potency')
@@ -12,7 +13,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
   const btnMediana = document.getElementById('btn-mediana')
   const btnLaplacian = document.getElementById('btn-laplacian')
   const btnHighboost = document.getElementById('btn-highboost')
-  const btnRobert = document.getElementById('btn-Robert')
+  const btnRobert = document.getElementById('btn-robert')
   const btnSobel = document.getElementById('btn-sobel')
 
 
