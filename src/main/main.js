@@ -1,5 +1,5 @@
 require('electron-reload')(__dirname)
-const { app, BrowserWindow, shell, ipcMain, dialog } =require('electron')
+const { app, BrowserWindow, shell, ipcMain, dialog, ipcRenderer } =require('electron')
 const { join } =require('path')
 const fs =require('fs')
 const https =require('node:https')
@@ -7,6 +7,7 @@ const Transformations = require('../renderer/processImage/scripts/Transformation
 const {PythonShell} =  require('python-shell');
 const path = require('path')
 const Filters = require('../renderer/processImage/scripts/Filters/index.js')
+const ShowImageWindow = require('../renderer/ShowImageWindow/index.js')
 // const Transformations =require('../renderer/processImage/scripts/Transformations/index.js')
 
 let win = null
@@ -126,7 +127,10 @@ ipcMain.on('btn-negative', ()=>{
     //call the negative function
     const filename = path.basename(currentPath.filePaths[0])
     const negativeImageName = filename.split('.')[0]
-    Transformations.negative(currentPath.filePaths[0], negativeImageName)
+    const result = Transformations.negative(currentPath.filePaths[0], negativeImageName)
+    
+    // ipcRenderer.send('create-show-image-window','negative',result.command[0])
+    // ShowImageWindow.selectTarget('negative',result.command[0])
   })
 
   
@@ -229,6 +233,10 @@ ipcMain.on('btn-sobel',()=>{
 
 })
 
+//create show image windows
 
+ipcMain.on('create-show-image-window', (event, path) => {
+  console.log(path)
+})
 
 

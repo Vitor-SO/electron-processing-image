@@ -1,5 +1,7 @@
 const { PythonShell } =require('python-shell');
-const {join} = require('path')
+const {join} = require('path');
+const ShowImageWindow = require('../../../ShowImageWindow');
+const { ipcRenderer } = require('electron/renderer');
 class Transformations{
 
   negative(filePath, negativeImageName){
@@ -9,13 +11,15 @@ class Transformations{
     }
 
     const negative = join(__dirname,'./Negative/negative.py')
-  PythonShell.run(negative, optionsPath, function (err,results) {
+  const result = PythonShell.run(negative, optionsPath, function (err,results) {
       if (err) throw err;
       console.log('finished');
-      console.log(results);
+      // ShowImageWindow.selectTarget('negative',results[0])
+      return results[0]
+
     });
 
-    window.open('https://github.com', '_blank', 'top=500,left=200,frame=false,nodeIntegration=no')
+    return result
   }
 
   logarithmic(filePath, logImageName){

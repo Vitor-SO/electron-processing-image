@@ -5,7 +5,6 @@ from PIL import Image
 # Load the image
 
 img = Image.open(sys.argv[1]);
-print(img)
 
 # Display the original image
 
@@ -38,4 +37,5 @@ for i in range(0, img.size[0]-1):
         img.putpixel((i,j),(redPixel, greenPixel, bluePixel));
 
 img.save("./src/renderer/processImage/TransformedImages/negative_"+sys.argv[2]+".png") 
-img.show()
+print("./src/renderer/processImage/TransformedImages/negative_"+sys.argv[2]+".png")
+sys.stdout.flush()
