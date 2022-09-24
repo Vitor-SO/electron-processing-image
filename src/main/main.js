@@ -123,27 +123,26 @@ ipcMain.on('create-coreWindow', ()=>{
   //core window functions
 ipcMain.on('btn-negative', ()=>{
   //get path image for python script
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+  dialog.showOpenDialog().then((currentPath)=>{
     //call the negative function
     const filename = path.basename(currentPath.filePaths[0])
     const negativeImageName = filename.split('.')[0]
-    const result = Transformations.negative(currentPath.filePaths[0], negativeImageName)
-    
+    const result = Transformations.negative(currentPath.filePaths[0], negativeImageName,"./Negative/negative.py")
     // ipcRenderer.send('create-show-image-window',result.command[0])
     // ShowImageWindow.selectTarget('negative',result.command[0])
 
     let win = null;
-    win = new BrowserWindow({
-      title: 'Image',
-      webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false,
-        webSecurity: true
-      },
-    })
+    fs.
+    win.loadFile(result.command[0])
+    // win = new BrowserWindow({
+    //   title: 'Image',
+    //   webPreferences: {
+    //     nodeIntegration: true,
+    //     contextIsolation: false,
+    //     webSecurity: true
+    //   },
+    // })
     
-      fs.
-      win.loadFile(result.command[0])
   })
 
   

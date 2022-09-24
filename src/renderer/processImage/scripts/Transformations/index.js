@@ -1,22 +1,39 @@
+const {BrowserWindow,} =require('electron')
 const { PythonShell } = require("python-shell");
 const { join } = require("path");
 const ShowImageWindow = require("../../../ShowImageWindow");
 const { ipcRenderer } = require("electron/renderer");
+const ejs = require('ejs');
+const path = require('path');
+const fs = require('fs')
 class Transformations {
-  negative(filePath, negativeImageName) {
+  negative(filePath, negativeImageName,filterPath) {
     const optionsPath = {
       args: [filePath, negativeImageName],
     };
-
-    const negative = join(__dirname, "./Negative/negative.py");
+    // "./Negative/negative.py"
+    const negative = join(__dirname, filterPath);
     const result = PythonShell.run(
       negative,
       optionsPath,
       function (err, results) {
         if (err) throw err;
-        console.log("finished");
+
+        console.log("finished",results);
+        let win = new BrowserWindow({width: 800, height: 600}); 
+        let options = {root: __dirname};
         // ShowImageWindow.selectTarget('negative',results[0])
-        return results[0];
+        const image  =  fs.readFileSync(path.resolve(__dirname,'..','..','..','..','..',results[0])).toString('base64')
+        console.log(image[0])
+        ejs.renderFile(path.resolve(__dirname,'..','..','..','templates','index.ejs'), {
+          image:`data:image/png;base64,${image}`
+        }, {}, function (err, str) {
+          if (err) {
+            console.log(err);
+          }
+          // Load the rendered HTML to the BrowserWindow.
+          win.loadURL('data:text/html;charset=utf-8,' + encodeURI(str));
+        });
       }
     );
 

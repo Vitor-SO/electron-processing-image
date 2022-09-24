@@ -15,8 +15,10 @@ window.addEventListener("DOMContentLoaded", () => {
   const btnRobert = document.getElementById("btn-robert");
   const btnSobel = document.getElementById("btn-sobel");
 
+  ipcRenderer.on("test",()=>btnNegative.style = "")
+
   btnNegative?.addEventListener("click", (e) => {
-    ipcRenderer.send("btn-negative");
+   ipcRenderer.send("btn-negative",4324)
   });
 
   btnLogarithmic?.addEventListener("click", (e) => {
