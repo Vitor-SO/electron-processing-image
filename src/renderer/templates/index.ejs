@@ -2,9 +2,21 @@
 <head>
   <title>The Index Page</title>
 </head>
+<style>
+  img{
+    width: 200px;
+    height: 200px;
+    margin-bottom: 2rem;
+  }
+</style>
 <body>
-  <h1>Welcome, this is the Index page.</h1>
-  <h3>Hello there </h3>
-  <img src="<%= image %>" />
+  <h1>
+    <%= nameImage %>
+  </h1>
+  <% images.forEach(function(image){ %>
+    <img  src="<%= image.url %>" />
+    <p><%= image.name %></p>
+  <% }); %>
+  
 </body>
 </html>

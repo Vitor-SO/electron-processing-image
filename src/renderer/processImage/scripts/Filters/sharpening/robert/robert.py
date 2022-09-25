@@ -17,3 +17,5 @@ edged_img *= 255
 
 
 cv2.imwrite('./src/renderer/processImage/FilteredImages/robert_' +sys.argv[2]+'.png', edged_img)
+print('./src/renderer/processImage/FilteredImages/robert_' +sys.argv[2]+'.png')
+sys.stdout.flush()

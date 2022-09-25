@@ -13,3 +13,5 @@ for i in range(1, img.shape[0]-1):
             resultant_image[i, x] = img[i, x] + mask
 
 cv2.imwrite('./src/renderer/processImage/FilteredImages/hightbooster_'+sys.argv[2]+'.png', resultant_image)
+print('./src/renderer/processImage/FilteredImages/hightbooster_'+sys.argv[2]+'.png')
+sys.stdout.flush()

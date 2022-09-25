@@ -19,3 +19,5 @@ plt.grid(True)
 
 # salvar o grafico como imagem
 cv2.imwrite('./src/renderer/processImage/TransformedImages/histogram_'+sys.argv[2]+'.png',histogram)
+print('./src/renderer/processImage/TransformedImages/histogram_'+sys.argv[2]+'.png')
+sys.stdout.flush()

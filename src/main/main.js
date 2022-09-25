@@ -1,15 +1,9 @@
 require('electron-reload')(__dirname)
 const { app, BrowserWindow, shell, ipcMain, dialog, ipcRenderer } =require('electron')
-const { join } =require('path')
 const fs =require('fs')
 const https =require('node:https')
-const Transformations = require('../renderer/processImage/scripts/Transformations/index.js')
-const {PythonShell} =  require('python-shell');
 const path = require('path')
-const Filters = require('../renderer/processImage/scripts/Filters/index.js')
-const ShowImageWindow = require('../renderer/ShowImageWindow/index.js')
-// const Transformations =require('../renderer/processImage/scripts/Transformations/index.js')
-
+const ImageProcessing = require('../renderer/processImage/scripts/index.js')
 let win = null
 async function createWindow() {
   win = new BrowserWindow({
@@ -120,7 +114,17 @@ ipcMain.on('create-coreWindow', ()=>{
   win.loadFile('src/renderer/CoreWindow/CoreWindow.html')
   
   const paths = {
-    'negative':"./Negative/negative.py"
+    'negative':"/Transformations/Negative/negative.py",
+    'logarithmic': "/Transformations/Logarithmic/logarithmic.py",
+    'potency': "/Transformations/Potency/potency.py",
+    'bitPlaneSlicing': "/Transformations/BitPlaneSlicing/bitPlaneSlicing.py",
+    'histogram': "/Transformations/Histogram/histogram.py",
+    'media': '/Filters/Smoothing/Media/media.py',
+    'mediana': '/Filters/Smoothing/Mediana/mediana.py',
+    'laplacian': '/Filters/sharpening/Laplacian/laplacian.py',
+    'highboost': '/Filters/sharpening/hightbooster/hightbooster.py',
+    'robert': '/Filters/sharpening/robert/robert.py',
+    'sobel': '/Filters/sharpening/sobel/sobel.py',
   }
 
   //core window functions
@@ -128,20 +132,12 @@ ipcMain.on('create-coreWindow', ()=>{
     dialog.showOpenDialog().then((currentPath)=>{
       //call the negative function
       const filename = path.basename(currentPath.filePaths[0])
-      const negativeImageName = filename.split('.')[0]
-      console.log(e)
-      const result = Transformations.negative(currentPath.filePaths[0], negativeImageName,paths[message])
-  
+      const imageName = filename.split('.')[0]
+      const result = ImageProcessing.execute(currentPath.filePaths[0], imageName,paths[message])
+      // console.log(result);
       fs.win.loadFile(result.command[0])
-      
     })
   })
-ipcMain.on('btn-negative', ()=>{
-  //get path image for python script
-  
-
-  
-})
 
 ipcMain.on('btn-logarithmic', ()=>{
   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{

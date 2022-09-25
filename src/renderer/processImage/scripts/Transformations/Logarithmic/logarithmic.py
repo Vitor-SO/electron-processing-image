@@ -60,4 +60,6 @@ imagename = sys.argv[1]
 img = Image.open(imagename)
 logTransformedImage = logTransformImage(img);
 
-logTransformedImage.save("./src/renderer/processImage/TransformedImages/log_"+sys.argv[2]+".png") 
+logTransformedImage.save("./src/renderer/processImage/TransformedImages/log_"+sys.argv[2]+".png")
+print("./src/renderer/processImage/TransformedImages/log_"+sys.argv[2]+".png")
+sys.stdout.flush() 

@@ -61,3 +61,6 @@ def planoDeBits(img, qtdBits):
 image = imread(sys.argv[1])
 img = rgb2gray(image)
 planoDeBits(img, 8)
+
+print("./src/renderer/processImage/TransformedImages/bps_"+sys.argv[2]+".png")
+sys.stdout.flush()

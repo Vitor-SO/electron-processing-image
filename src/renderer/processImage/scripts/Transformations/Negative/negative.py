@@ -1,7 +1,7 @@
 # import Pillow modules
 import sys
 from PIL import Image
-
+import json
 # Load the image
 
 img = Image.open(sys.argv[1]);
@@ -37,5 +37,8 @@ for i in range(0, img.size[0]-1):
         img.putpixel((i,j),(redPixel, greenPixel, bluePixel));
 
 img.save("./src/renderer/processImage/TransformedImages/negative_"+sys.argv[2]+".png") 
-print("./src/renderer/processImage/TransformedImages/negative_"+sys.argv[2]+".png")
+# print("./src/renderer/processImage/TransformedImages/negative_"+sys.argv[2]+".png")
+object = [{"url":"./src/renderer/processImage/TransformedImages/negative_"+sys.argv[2]+".png","name":"negative"}]
+print(json.dumps(object))
+print('Negative')
 sys.stdout.flush()
