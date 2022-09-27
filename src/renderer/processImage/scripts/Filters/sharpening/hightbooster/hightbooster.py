@@ -1,3 +1,4 @@
+import json
 import cv2
 import sys
 
@@ -12,6 +13,9 @@ for i in range(1, img.shape[0]-1):
             mask = 1 * img[i, x] - blur_factor
             resultant_image[i, x] = img[i, x] + mask
 
-cv2.imwrite('./src/renderer/processImage/FilteredImages/hightbooster_'+sys.argv[2]+'.png', resultant_image)
-print('./src/renderer/processImage/FilteredImages/hightbooster_'+sys.argv[2]+'.png')
+cv2.imwrite('./src/renderer/processImage/FilteredImages/hightboost_'+sys.argv[2]+'.png', resultant_image)
+
+object = [{"url":'./src/renderer/processImage/FilteredImages/hightboost_'+sys.argv[2]+'.png',"name":"high boost"}]
+print(json.dumps(object))
+print('High Boost')
 sys.stdout.flush()

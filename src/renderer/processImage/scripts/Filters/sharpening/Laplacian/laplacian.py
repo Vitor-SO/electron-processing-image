@@ -1,3 +1,4 @@
+import json
 import cv2
 import sys
 import numpy as np
@@ -8,5 +9,9 @@ lap = cv2.Laplacian(img, cv2.CV_64F)
 lap = np.uint8(np.absolute(lap))
 result = np.vstack([img, lap])
 cv2.imwrite('./src/renderer/processImage/FilteredImages/laplacian_'+sys.argv[2]+'.png', result)
-print('./src/renderer/processImage/FilteredImages/laplacian_'+sys.argv[2]+'.png')
+
+
+object = [{"url":'./src/renderer/processImage/FilteredImages/laplacian_'+sys.argv[2]+'.png',"name":"laplaciana"}]
+print(json.dumps(object))
+print('Laplaciana')
 sys.stdout.flush()

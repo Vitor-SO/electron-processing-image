@@ -1,5 +1,6 @@
 
 # import Pillow modules
+import json
 from PIL import Image
 import math
 import sys
@@ -61,5 +62,7 @@ img = Image.open(imagename)
 logTransformedImage = logTransformImage(img);
 
 logTransformedImage.save("./src/renderer/processImage/TransformedImages/log_"+sys.argv[2]+".png")
-print("./src/renderer/processImage/TransformedImages/log_"+sys.argv[2]+".png")
-sys.stdout.flush() 
+object = [{"url":"./src/renderer/processImage/TransformedImages/log_"+sys.argv[2]+".png","name":"logarithmic"}]
+print(json.dumps(object))
+print('Logarithmic')
+sys.stdout.flush()
