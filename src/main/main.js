@@ -119,6 +119,8 @@ ipcMain.on('create-coreWindow', ()=>{
     'potency': "/Transformations/Potency/potency.py",
     'bitPlaneSlicing': "/Transformations/BitPlaneSlicing/bitPlaneSlicing.py",
     'histogram': "/Transformations/Histogram/histogram.py",
+    'equalizacaoGlobal': "/Transformations/Equalizacao/EqualizacaoGlobal/equalizacao_global.py",
+    'equalizacaoLocal': "/Transformations/Equalizacao/EqualizacaoLocal/equalizacao_local.py",
     'media': '/Filters/Smoothing/Media/media.py',
     'mediana': '/Filters/Smoothing/Mediana/mediana.py',
     'laplacian': '/Filters/sharpening/Laplacian/laplacian.py',
