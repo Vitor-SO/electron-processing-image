@@ -1,4 +1,5 @@
 
+import json
 import cv2
 import sys
 from matplotlib import pyplot as plt
@@ -15,9 +16,11 @@ plt.title('Histogram')
 plt.xlabel('Pixels')
 plt.ylabel('Intensity')
 plt.grid(True)
-# plt.show()
+plt.show()
 
 # salvar o grafico como imagem
-cv2.imwrite('./src/renderer/processImage/TransformedImages/histogram_'+sys.argv[2]+'.png',histogram)
-print('./src/renderer/processImage/TransformedImages/histogram_'+sys.argv[2]+'.png')
-sys.stdout.flush()
+# cv2.imwrite('./src/renderer/processImage/TransformedImages/histogram_'+sys.argv[2]+'.png',histogram)
+# object = [{"url":"./src/renderer/processImage/TransformedImages/histogram_"+sys.argv[2]+".png","name":"histogram"}]
+# print(json.dumps(object))
+# print('Histograma')
+# sys.stdout.flush()

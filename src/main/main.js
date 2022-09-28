@@ -135,7 +135,7 @@ ipcMain.on('create-coreWindow', ()=>{
       const imageName = filename.split('.')[0]
       const result = ImageProcessing.execute(currentPath.filePaths[0], imageName,paths[message])
       // console.log(result);
-      fs.win.loadFile(result.command[0])
+      fs.win.loadFile(result?.command[0])
     })
   })
 
