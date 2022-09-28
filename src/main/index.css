@@ -15,24 +15,30 @@ body {
   flex-direction: column;
   color: #fff;
 }
-.title {
-}
-.mainContainer {
-}
+
 
 .image_url_container {
   border: 2px solid #fff;
+  border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
+}
+input {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  background-color: #282c34;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 50%;
+  text-align: left;
 
-  input {
-    padding-left: 1rem;
-    margin-bottom: 0.5rem;
-  }
 }
 .image_import_container {
   border: 2px solid #fff;
@@ -47,4 +53,24 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+ 
+}
+#btn-process-image{
+  padding: 0.8rem;
+  margin: 1rem;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: #282c34;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+
+  transition: all 0.3s ease-in-out;
+}
+
+#btn-process-image:hover {
+  background-color: #282c34;
+  color: #fff;
 }
