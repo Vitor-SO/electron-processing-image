@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: #282c34;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
 }
 
 .container {
@@ -9,9 +9,11 @@ body {
   align-items: center;
   flex-direction: column;
   color: #fff;
+  margin: 0 50px;
 }
 
 .transformations-container , .filters-container{
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,15 +28,18 @@ body {
   height: 50px;
   font-size: 18px;
   margin: 0.5rem;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
 
   transition: all 0.2s ease-in-out;
 }
 
 .btn:hover ,.btn-bitPlaneSlicing:hover {
   cursor: pointer;
-  background-color: #282c34;
+  background-color: #475e8b;
+
   color: #fff;
-  border-color: #fff;
+  border: none;
 }
 
 .btn-bitPlaneSlicing {
