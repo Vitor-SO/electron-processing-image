@@ -1,15 +1,9 @@
 require('electron-reload')(__dirname)
 const { app, BrowserWindow, shell, ipcMain, dialog, ipcRenderer } =require('electron')
-const { join } =require('path')
 const fs =require('fs')
 const https =require('node:https')
-const Transformations = require('../renderer/processImage/scripts/Transformations/index.js')
-const {PythonShell} =  require('python-shell');
 const path = require('path')
-const Filters = require('../renderer/processImage/scripts/Filters/index.js')
-const ShowImageWindow = require('../renderer/ShowImageWindow/index.js')
-// const Transformations =require('../renderer/processImage/scripts/Transformations/index.js')
-
+const ImageProcessing = require('../renderer/processImage/scripts/index.js')
 let win = null
 async function createWindow() {
   win = new BrowserWindow({
@@ -119,22 +113,33 @@ ipcMain.on('create-coreWindow', ()=>{
 
   win.loadFile('src/renderer/CoreWindow/CoreWindow.html')
   
+  const paths = {
+    'negative':"/Transformations/Negative/negative.py",
+    'logarithmic': "/Transformations/Logarithmic/logarithmic.py",
+    'potency': "/Transformations/Potency/potency.py",
+    'bitPlaneSlicing': "/Transformations/BitPlaneSlicing/bitPlaneSlicing.py",
+    'histogram': "/Transformations/Histogram/histogram.py",
+    'equalizacaoGlobal': "/Transformations/Equalizacao/EqualizacaoGlobal/equalizacao_global.py",
+    'equalizacaoLocal': "/Transformations/Equalizacao/EqualizacaoLocal/equalizacao_local.py",
+    'media': '/Filters/Smoothing/Media/media.py',
+    'mediana': '/Filters/Smoothing/Mediana/mediana.py',
+    'laplacian': '/Filters/sharpening/Laplacian/laplacian.py',
+    'highboost': '/Filters/sharpening/hightbooster/hightbooster.py',
+    'robert': '/Filters/sharpening/robert/robert.py',
+    'sobel': '/Filters/sharpening/sobel/sobel.py',
+  }
 
   //core window functions
-ipcMain.on('btn-negative', ()=>{
-  //get path image for python script
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    //call the negative function
-    const filename = path.basename(currentPath.filePaths[0])
-    const negativeImageName = filename.split('.')[0]
-    const result = Transformations.negative(currentPath.filePaths[0], negativeImageName)
-    
-    // ipcRenderer.send('create-show-image-window','negative',result.command[0])
-    // ShowImageWindow.selectTarget('negative',result.command[0])
+  ipcMain.on("filter",(e,message) =>{
+    dialog.showOpenDialog().then((currentPath)=>{
+      //call the negative function
+      const filename = path.basename(currentPath.filePaths[0])
+      const imageName = filename.split('.')[0]
+      const result = ImageProcessing.execute(currentPath.filePaths[0], imageName,paths[message])
+      // console.log(result);
+      fs.win.loadFile(result?.command[0])
+    })
   })
-
-  
-})
 
 ipcMain.on('btn-logarithmic', ()=>{
   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
@@ -171,14 +176,14 @@ ipcMain.on('btn-bitPlaneSlicing', ()=>{
 
 })
 
-// ipcMain.on('btn-histogram',()=>{
-//   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-//     //call the negative function
-//     const filename = path.basename(currentPath.filePaths[0])
-//     const bpsImageName = filename.split('.')[0]
-//     Transformations.(currentPath.filePaths[0], bpsImageName)
-//   })
-// })
+ipcMain.on('btn-histogram',()=>{
+  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
+    //call the negative function
+    const filename = path.basename(currentPath.filePaths[0])
+    const gistImageName = filename.split('.')[0]
+    Transformations.histogram(currentPath.filePaths[0], gistImageName)
+  })
+})
 
 ipcMain.on('btn-media',()=>{
   dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
@@ -236,7 +241,16 @@ ipcMain.on('btn-sobel',()=>{
 //create show image windows
 
 ipcMain.on('create-show-image-window', (event, path) => {
-  console.log(path)
+  let win = null
+  win = new BrowserWindow({
+    title: 'Image',
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      webSecurity: true
+    },
+  })
+    win.loadFile('src/renderer/processImage/ShowImageWindow/ShowImageWindow.html')
 })
 
 
