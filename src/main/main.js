@@ -1,9 +1,11 @@
-require('electron-reload')(__dirname)
 const { app, BrowserWindow, shell, ipcMain, dialog, ipcRenderer } =require('electron')
 const fs =require('fs')
 const https =require('node:https')
 const path = require('path')
 const ImageProcessing = require('../renderer/processImage/scripts/index.js')
+const ejs = require('ejs');
+
+let global_pathImage = ''
 let win = null
 async function createWindow() {
   win = new BrowserWindow({
@@ -69,34 +71,6 @@ app.on('activate', () => {
 })
 
 
-// //mudar para ipcRenderer dentro do button e fazer o ipcMain.on dentro da funcao criada
-// //function download image
-ipcMain.on("download-image",(event, url,imageName) => {
-  dialog.showSaveDialog({defaultPath: imageName}).then((currentPath)=>{
-    https.get(url,(res)=>{
-      var imageStream = fs.createWriteStream(currentPath.filePath)
-      res.pipe(imageStream)
-    })
-
-
-    // 
-    setTimeout(()=>{
-      fs.writeFileSync(`./src/renderer/processImage/Images/${imageName}`,fs.readFileSync(currentPath.filePath))
-    },1500)
-    
-    // fs.copyFileSync(currentPath.filePath, `./src/Downloads/${filename}`)
-  })
-  
-})
-
-//function import image
-ipcMain.on('import-image', ()=>{
-  dialog.showOpenDialog({defaultPath: app.getPath("downloads")}).then((currentPath)=>{
-    const basename = path.basename(currentPath.filePaths[0])
-    fs.writeFileSync(`./src/renderer/processImage/Images/${basename}`, fs.readFileSync(currentPath.filePaths[0]))
-  })
-})
-
 
 //create core window
 
@@ -112,7 +86,55 @@ ipcMain.on('create-coreWindow', ()=>{
   })
 
   win.loadFile('src/renderer/CoreWindow/CoreWindow.html')
+
+})
+
+//show original image 
+ipcMain.on("original-image",  () =>{
+  dialog.showOpenDialog({
+    filters: [
+      { name: 'Images', extensions: ['jpg', 'png', 'gif', '.tif'] },
+    ]
+  }).then((currentPath)=>{
+    const currentPathImage = currentPath.filePaths[0]
+    let win =null;
+  win = new BrowserWindow({
+    title: 'Original Image',
+  webPreferences: {
+    nodeIntegration: true,
+    contextIsolation: false,  
+    webSecurity: true
+  },
+  })
   
+  const images = []
+  const pathImage = [{"url":currentPathImage}]
+  pathImage.forEach(function ({url,name}){
+    const dataImage = fs.readFileSync(path.resolve(__dirname,'..',url)).toString('base64')
+    images.push({url: `data:image/png;base64,${dataImage}`})
+  })
+  
+
+  ejs.renderFile(path.resolve(__dirname,'..','renderer','templates','originalImage.ejs'), {
+    images,
+  }, {}, function (err, str) {
+    if (err) {
+      console.log(err);
+    }
+
+    
+    win.loadURL('data:text/html;charset=utf-8,' + encodeURI(str));
+  });
+  
+  global_pathImage = currentPathImage
+  })
+
+})
+
+// //coreWindow functions
+ipcMain.on('process-image',  (event, message) =>{
+  console.log(message);
+
   const paths = {
     'negative':"/Transformations/Negative/negative.py",
     'logarithmic': "/Transformations/Logarithmic/logarithmic.py",
@@ -129,128 +151,10 @@ ipcMain.on('create-coreWindow', ()=>{
     'sobel': '/Filters/sharpening/sobel/sobel.py',
   }
 
-  //core window functions
-  ipcMain.on("filter",(e,message) =>{
-    dialog.showOpenDialog().then((currentPath)=>{
-      //call the negative function
-      const filename = path.basename(currentPath.filePaths[0])
-      const imageName = filename.split('.')[0]
-      const result = ImageProcessing.execute(currentPath.filePaths[0], imageName,paths[message])
-      // console.log(result);
-      fs.win.loadFile(result?.command[0])
-    })
-  })
-
-ipcMain.on('btn-logarithmic', ()=>{
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    //call the log function
-    const filename = path.basename(currentPath.filePaths[0])
-    const logImageName = filename.split('.')[0]
-    Transformations.logarithmic(currentPath.filePaths[0], logImageName)
-  })
+    const currentPathImage = global_pathImage
+    const filename = path.basename(global_pathImage)
+    const imageName = filename.split('.')[0]
+    ImageProcessing.execute(currentPathImage, imageName,paths[message])
+    
+    // fs.win.loadFile(result?.command[0])
 })
-
-ipcMain.on('btn-potency', ()=>{
-  
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    //call the negative function
-    const filename = path.basename(currentPath.filePaths[0])
-    const potImageName = filename.split('.')[0]
-    Transformations.potency(currentPath.filePaths[0], potImageName)
-  })
-
-
-})
-
-
-ipcMain.on('btn-bitPlaneSlicing', ()=>{
-  
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    //call the negative function
-    const filename = path.basename(currentPath.filePaths[0])
-    const bpsImageName = filename.split('.')[0]
-    Transformations.bitPlaneSlicing(currentPath.filePaths[0], bpsImageName)
-  })
-
-
-
-})
-
-ipcMain.on('btn-histogram',()=>{
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    //call the negative function
-    const filename = path.basename(currentPath.filePaths[0])
-    const gistImageName = filename.split('.')[0]
-    Transformations.histogram(currentPath.filePaths[0], gistImageName)
-  })
-})
-
-ipcMain.on('btn-media',()=>{
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    //call the negative function
-    const filename = path.basename(currentPath.filePaths[0])
-    const mediaImageName = filename.split('.')[0]
-    Filters.media(currentPath.filePaths[0], mediaImageName)
-  })
-})
-
-ipcMain.on('btn-mediana',()=>{
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    //call the negative function
-    const filename = path.basename(currentPath.filePaths[0])
-    const medianaImageName = filename.split('.')[0]
-    Filters.mediana(currentPath.filePaths[0], medianaImageName)
-  })
-})
-
-ipcMain.on('btn-laplacian',()=>{
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    //call the negative function
-    const filename = path.basename(currentPath.filePaths[0])
-    const laplacianImageName = filename.split('.')[0]
-    Filters.laplacian(currentPath.filePaths[0], laplacianImageName)
-  })
-})
-
-ipcMain.on('btn-highboost',()=>{
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    const filename = path.basename(currentPath.filePaths[0])
-    const imghighboost = filename.split('.')[0]
-    Filters.highboost(currentPath.filePaths[0], imghighboost)
-  })
-})
-
-ipcMain.on('btn-robert',()=>{
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    const filename = path.basename(currentPath.filePaths[0])
-    const robertImage = filename.split('.')[0]
-    Filters.robert(currentPath.filePaths[0], robertImage)
-  })
-})
-
-ipcMain.on('btn-sobel',()=>{
-  dialog.showOpenDialog({defaultPath: app.getPath("recent")}).then((currentPath)=>{
-    const filename = path.basename(currentPath.filePaths[0])
-    const sobelImage = filename.split('.')[0]
-    Filters.sobel(currentPath.filePaths[0], sobelImage)
-  })
-})
-
-})
-
-//create show image windows
-
-ipcMain.on('create-show-image-window', (event, path) => {
-  let win = null
-  win = new BrowserWindow({
-    title: 'Image',
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      webSecurity: true
-    },
-  })
-    win.loadFile('src/renderer/processImage/ShowImageWindow/ShowImageWindow.html')
-})
-
-

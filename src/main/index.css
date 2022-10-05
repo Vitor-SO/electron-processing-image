@@ -5,8 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-  
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 
 .container {
@@ -17,7 +21,6 @@ body {
   color: #fff;
 }
 
-
 .image_url_container {
   border: 2px solid #fff;
   border-radius: 0.5rem;
@@ -27,19 +30,17 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  
 }
 input {
   padding: 1rem;
   margin-bottom: 0.5rem;
   border: 2px solid #fff;
   border-radius: 0.5rem;
-  background-color: #fff ;
+  background-color: #fff;
   color: #000;
   font-size: 1.5rem;
   width: 80%;
   text-align: left;
-
 }
 .image_import_container {
   border: 2px solid #000;
@@ -54,10 +55,28 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-
- 
 }
-#btn-process-image{
+
+#btn-choose-image {
+  padding: 0.8rem;
+  margin: 1rem;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: #282c34;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+
+  transition: all 0.3s ease-in-out;
+}
+
+#btn-choose-image:hover {
+  background-color: #475e8b;
+  color: #fff;
+}
+
+#btn-process-image {
   padding: 0.8rem;
   margin: 1rem;
   border: 2px solid #fff;

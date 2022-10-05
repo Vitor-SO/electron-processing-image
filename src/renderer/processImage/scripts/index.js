@@ -11,7 +11,6 @@ class ImageProcessing {
       args: [filePath, imageName],
     };
 
-    console.log(filePath, imageName, filterPath +'\n\n\n');
     const script = join(__dirname, filterPath);
     const result = PythonShell.run(script, optionsPath,
       function (err, results) {
