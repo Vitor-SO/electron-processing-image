@@ -133,7 +133,6 @@ ipcMain.on("original-image",  () =>{
 
 // //coreWindow functions
 ipcMain.on('process-image',  (event, message) =>{
-  console.log(message);
 
   const paths = {
     'negative':"/Transformations/Negative/negative.py",
