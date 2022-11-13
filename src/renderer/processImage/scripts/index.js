@@ -7,6 +7,7 @@ const fs = require('fs')
 
 class ImageProcessing {
   execute(filePath, imageName,filterPath) {
+
     const optionsPath = {
       args: [filePath, imageName],
     };

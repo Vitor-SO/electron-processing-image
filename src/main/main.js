@@ -148,9 +148,14 @@ ipcMain.on('process-image',  (event, message) =>{
     'highboost': '/Filters/sharpening/hightbooster/hightbooster.py',
     'robert': '/Filters/sharpening/robert/robert.py',
     'sobel': '/Filters/sharpening/sobel/sobel.py',
+    'erode': '/MorphOperators/Erode/erode.py'
   }
 
     const currentPathImage = global_pathImage
+    if(currentPathImage === undefined || currentPathImage === '') {
+      console.log('errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrou');
+      return
+    }
     const filename = path.basename(global_pathImage)
     const imageName = filename.split('.')[0]
     ImageProcessing.execute(currentPathImage, imageName,paths[message])
