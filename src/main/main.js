@@ -148,7 +148,11 @@ ipcMain.on('process-image',  (event, message) =>{
     'highboost': '/Filters/sharpening/hightbooster/hightbooster.py',
     'robert': '/Filters/sharpening/robert/robert.py',
     'sobel': '/Filters/sharpening/sobel/sobel.py',
-    'erode': '/MorphOperators/Erode/erode.py'
+    'erode': '/MorphOperators/Erode/erode.py',
+    'dilate': '/MorphOperators/Dilate/dilate.py',
+    'opening': '/MorphOperators/Opening/opening.py',
+    'closing': '/MorphOperators/Closing/closing.py',
+    'hitormiss': '/MorphOperators/HitorMiss/hitormiss.py',
   }
 
     const currentPathImage = global_pathImage
