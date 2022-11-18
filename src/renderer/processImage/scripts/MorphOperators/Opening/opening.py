@@ -14,7 +14,6 @@ def isGray(imgPath):
 
 image = isGray(sys.argv[1])
 
-#aply erode filter
 kernel = np.array([[0,1,1,0], [1,1,1,1],[0,1,1,0]], np.uint8)
 
 img_open = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
