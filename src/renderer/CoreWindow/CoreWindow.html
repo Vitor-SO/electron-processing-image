@@ -2,41 +2,52 @@
 <html lang="en">
   <head>
     <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
-    <link rel="stylesheet" href="CoreWindow.css"/>
+    <link rel="stylesheet" href="CoreWindow.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval';" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-eval';"
+    />
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self' 'unsafe-eval'"/> -->
   </head>
   <body>
     <div id="corewindow"></div>
     <div class="container">
-      <h1>Escolha entre as transformações: </h1>
+      <h1>Escolha entre as transformações:</h1>
       <div class="transformations-container">
-        <button id="negative"  class="btn">negativa</button>
+        <button id="negative" class="btn">negativa</button>
         <button id="logarithmic" class="btn">logarítmicas</button>
-        <button id="potency" class="btn">potência </button>
+        <button id="potency" class="btn">potência</button>
         <button id="bitPlaneSlicing" class="btn">fatiamento de bits</button>
       </div>
 
-      <h1>Histograma e Equalização:</h1>
+      <h1>Histograma e Equalização</h1>
       <div class="histogram-container">
-          <button id="histogram" class="btn">histograma</button>
-          <button id="equalizacaoGlobal" class="btn">Equalização Global</button>
-          <button id="equalizacaoLocal" class="btn">Equalização Local</button>
+        <button id="histogram" class="btn">histograma</button>
+        <button id="equalizacaoGlobal" class="btn">Equalização Global</button>
+        <button id="equalizacaoLocal" class="btn">Equalização Local</button>
       </div>
 
       <h1>Escolha entre os filtros:</h1>
       <div class="filters-container">
-        <button id="media"  class="btn">Media</button>
-        <button id="mediana"  class="btn">Mediana</button>
-        <button id="laplacian"  class="btn">Laplaciano</button>
-        <button id="highboost"  class="btn">High Boost</button>
-        <button id="robert"  class="btn">Robert</button>
-        <button id="sobel"  class="btn">Sobel</button>
+        <button id="media" class="btn">Media</button>
+        <button id="mediana" class="btn">Mediana</button>
+        <button id="laplacian" class="btn">Laplaciano</button>
+        <button id="highboost" class="btn">High Boost</button>
+        <button id="robert" class="btn">Robert</button>
+        <button id="sobel" class="btn">Sobel</button>
+      </div>
+
+      <h1>Escolha entre os segmentadores</h1>
+
+      <div class="filters-container">
+        <button id="gradient" class="btn">Linear Gradient</button>
+        <button id="watershed" class="btn">watershed</button>
+        <button id="crescimento" class="btn">Crescimento Regiao</button>
       </div>
     </div>
-    
+
     <script type="module" src="./CoreWindow.js"></script>
   </body>
 </html>
