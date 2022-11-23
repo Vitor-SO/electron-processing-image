@@ -10,7 +10,7 @@ import cv2
 import json
 sigma = 0.1
 t = 0.5
-connectivity = 2
+connectivity = 1
 
 imgPath = sys.argv[1]
 image = cv2.imread(imgPath, cv2.IMREAD_COLOR)
