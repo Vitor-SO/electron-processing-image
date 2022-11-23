@@ -167,6 +167,19 @@ ipcMain.on("process-image", (event, message) => {
     gradient: "/Segmentation/gradiente/gradiente.py",
     watershed: "/Segmentation/watershed/watershed.py",
     crescimento: "/Segmentation/crescregion/cresregion.py",
+    hough: "/Segmentation/hough/hough.py",
+    canny: "/Segmentation/canny/canny.py",
+    limiarizacao: "/Segmentation/limiarizacao/limiarizacao.py",
+    limiarizacao_media:
+      "/Segmentation/limiarizacao-media/limiarizacao-media.py",
+    marr_hildreth: "/Segmentation/marr-hildreth/marr-hildreth.py",
+    prewitt: "/Segmentation/prewitt/prewitt.py",
+    ComponentsConexos:
+      "/AlgoritmosMorfologicos/componentesconexos/componentesconexos.py",
+    extrassaofronteira:
+      "/AlgoritmosMorfologicos/extrassaofronteira/extrassaofronteira.py",
+    preenchimentoborda:
+      "/AlgoritmosMorfologicos/preenchimentoborda/preenchimentoborda.py",
   };
 
   const currentPathImage = global_pathImage;
