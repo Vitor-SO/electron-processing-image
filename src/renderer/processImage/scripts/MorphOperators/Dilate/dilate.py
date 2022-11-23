@@ -14,26 +14,26 @@ def isGray(imgPath):
 
 image = isGray(sys.argv[1])
 
-#aply erode filter
-kernel = np.ones((4,4),np.uint8)
+#cv2 threshold and transform in gray
+threshold, img_thresh = cv2.threshold(image, 127,255,cv2.THRESH_BINARY_INV)
 
-img_dilate = cv2.dilate(image,kernel,iterations=2)
-img_dilate2 = cv2.dilate(image,kernel,iterations=4)
-img_dilate3 = cv2.dilate(image,kernel,iterations=6)
-img_dilate4 = cv2.dilate(image,kernel,iterations=8)
-img_dilate5 = cv2.dilate(image,kernel,iterations=10)
+#aply erode filter
+kernel = np.ones((1,1),np.uint8)
+kernel2 = np.ones((3,3),np.uint8)
+kernel3 = np.ones((5,5),np.uint8)
+
+img_erode = cv2.erode(image,kernel,iterations=1)
+img_dilate = cv2.dilate(img_erode,kernel,iterations=1)
+img_dilate2 = cv2.dilate(img_erode,kernel2,iterations=1)
+img_dilate3 = cv2.dilate(img_erode,kernel3,iterations=1)
 
 cv2.imwrite('./src/renderer/processImage/FilteredImages/dilate_'+sys.argv[2]+'.png', img_dilate) 
 cv2.imwrite('./src/renderer/processImage/FilteredImages/dilate2_'+sys.argv[2]+'.png', img_dilate2) 
 cv2.imwrite('./src/renderer/processImage/FilteredImages/dilate3_'+sys.argv[2]+'.png', img_dilate3) 
-cv2.imwrite('./src/renderer/processImage/FilteredImages/dilate4_'+sys.argv[2]+'.png', img_dilate4) 
-cv2.imwrite('./src/renderer/processImage/FilteredImages/dilate5_'+sys.argv[2]+'.png', img_dilate5) 
 object = [
 {"url":"./src/renderer/processImage/FilteredImages/dilate_"+sys.argv[2]+".png","name":"dilate"},
 {"url":"./src/renderer/processImage/FilteredImages/dilate2_"+sys.argv[2]+".png","name":"dilate2"},
 {"url":"./src/renderer/processImage/FilteredImages/dilate3_"+sys.argv[2]+".png","name":"dilate3"},
-{"url":"./src/renderer/processImage/FilteredImages/dilate4_"+sys.argv[2]+".png","name":"dilate4"},
-{"url":"./src/renderer/processImage/FilteredImages/dilate5_"+sys.argv[2]+".png","name":"dilate5"}
 ]
 print(json.dumps(object))
 print('Cars')
