@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+  <title>The Index Page</title>
+</head>
+<style>
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  img{
+    width: 300px;
+    height: 300px;
+    margin-bottom: 2rem;
+  }
+</style>
+<body>
+  <h1>
+    <%= nameImage %>
+  </h1>
+  <% images.forEach(function(image){ %>
+    <img  src="<%= image.url %>" />
+    <p><%= image.name %></p>
+  <% }); %>
+  
+</body>
+</html>

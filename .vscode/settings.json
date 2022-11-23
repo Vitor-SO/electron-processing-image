@@ -1,0 +1,5 @@
+{
+  "python.analysis.extraPaths": [
+    "./src/renderer/processImage/scripts/CroppedImage"
+  ]
+}

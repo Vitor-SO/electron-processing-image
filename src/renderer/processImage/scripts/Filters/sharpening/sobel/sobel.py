@@ -1,3 +1,4 @@
+import json
 import cv2
 import sys
 
@@ -12,3 +13,12 @@ sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=5)
 sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=5)
 cv2.imwrite("./src/renderer/processImage/FilteredImages/sobelx_" +sys.argv[2]+'.png', sobelx)
 cv2.imwrite("./src/renderer/processImage/FilteredImages/sobely_" +sys.argv[2]+'.png', sobely)
+
+
+object = [
+{"url":"./src/renderer/processImage/FilteredImages/sobelx_" +sys.argv[2]+'.png',"name":"sobel X"},
+{"url":"./src/renderer/processImage/FilteredImages/sobely_" +sys.argv[2]+'.png',"name":"sobel Y"}
+]
+print(json.dumps(object))
+print('Sobel')
+sys.stdout.flush()

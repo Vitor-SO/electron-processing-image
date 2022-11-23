@@ -1,3 +1,4 @@
+import json
 import cv2
 import sys
 import numpy as np
@@ -17,3 +18,8 @@ edged_img *= 255
 
 
 cv2.imwrite('./src/renderer/processImage/FilteredImages/robert_' +sys.argv[2]+'.png', edged_img)
+
+object = [{"url":'./src/renderer/processImage/FilteredImages/robert_' +sys.argv[2]+'.png',"name":"robert"}]
+print(json.dumps(object))
+print('Robert')
+sys.stdout.flush()
